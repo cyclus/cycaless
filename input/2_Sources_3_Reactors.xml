@@ -9,7 +9,7 @@
 
   <archetypes>
     <spec>
-      <lib>cycaless</lib>
+      <lib>cycamore</lib>
       <name>Source</name>
     </spec>
     <spec>
@@ -57,8 +57,6 @@
           <inrecipe>uox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
           <outrecipe>uox_used_fuel_recipe</outrecipe>
-        </fuel>
-        <fuel>
           <incommodity>mox</incommodity>
           <inrecipe>mox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
@@ -102,8 +100,6 @@
           <inrecipe>uox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
           <outrecipe>uox_used_fuel_recipe</outrecipe>
-        </fuel>
-        <fuel>
           <incommodity>mox</incommodity>
           <inrecipe>mox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
@@ -142,8 +138,6 @@
           <inrecipe>uox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
           <outrecipe>uox_used_fuel_recipe</outrecipe>
-        </fuel>
-        <fuel>
           <incommodity>mox</incommodity>
           <inrecipe>mox_fuel_recipe</inrecipe>
           <outcommodity>waste</outcommodity>
@@ -186,23 +180,15 @@
             <prototype>UOX_Source</prototype>
             <number>1</number>
             <date>1</date>
-          </buildorder>
-          <buildorder>
             <prototype>MOX_Source</prototype>
             <number>1</number>
             <date>1</date>
-          </buildorder>
-          <buildorder>
             <prototype>Reactor1</prototype>
             <number>1</number>
             <date>1</date>
-          </buildorder>
-          <buildorder>
             <prototype>Reactor2</prototype>
             <number>1</number>
             <date>2</date>
-          </buildorder>
-          <buildorder>
             <prototype>Reactor3</prototype>
             <number>1</number>
             <date>3</date>
