@@ -45,14 +45,14 @@ CommodityRecipeContext* CommodityRecipeContext::Clone() {
 }
 
 void CommodityRecipeContext::InfileToDb(InfileTree* qe, cyclus::DbInit di) {
-  int nfuel = qe->NMatches("fuel");
+  InfileTree* fuel = qe->SubTree("fuel");
+  int nfuel = fuel->NMatches("incommodity");
   for (int i = 0; i < nfuel; i++) {
-    InfileTree* fuel = qe->SubTree("fuel", i);
     di.NewDatum("CommodityRecipeContext_inoutmap")
-        ->AddVal("in_commod", fuel->GetString("incommodity"))
-        ->AddVal("in_recipe", fuel->GetString("inrecipe"))
-        ->AddVal("out_commod", fuel->GetString("outcommodity"))
-        ->AddVal("out_recipe", fuel->GetString("outrecipe"))
+        ->AddVal("in_commod", fuel->GetString("incommodity", i))
+        ->AddVal("in_recipe", fuel->GetString("inrecipe", i))
+        ->AddVal("out_commod", fuel->GetString("outcommodity", i))
+        ->AddVal("out_recipe", fuel->GetString("outrecipe", i))
         ->Record();
   }
 }
@@ -100,14 +100,14 @@ void CommodityRecipeContext::Snapshot(DbInit di) {
 
 std::string CommodityRecipeContext::schema() {
   return
-      "  <oneOrMore>                                 \n"
       "  <element name=\"fuel\">                     \n"
+      "  <oneOrMore>                                 \n"
       "    <element name=\"incommodity\"><text/></element>\n"
       "    <element name=\"inrecipe\"><text/></element>\n"
       "    <element name=\"outcommodity\"><text/></element>\n"
       "    <element name=\"outrecipe\"><text/></element>\n"
-      "  </element>                                  \n"
-      "  </oneOrMore>                                \n";
+      "  </oneOrMore>                                \n"
+      "  </element>                                  \n";
 }
 
 // static members
@@ -220,8 +220,8 @@ std::string BatchReactor::schema() {
       "                                              \n"
       "  <!-- Recipe Changes  -->                    \n"
       "  <optional>                                  \n"
-      "  <oneOrMore>                                 \n"
       "  <element name=\"recipe_change\">            \n"
+      "  <oneOrMore>                                 \n"
       "   <element name=\"incommodity\">             \n"
       "     <data type=\"string\"/>                  \n"
       "   </element>                                 \n"
@@ -231,8 +231,8 @@ std::string BatchReactor::schema() {
       "   <element name=\"time\">                    \n"
       "     <data type=\"nonNegativeInteger\"/>      \n"
       "   </element>                                 \n"
-      "  </element>                                  \n"
       "  </oneOrMore>                                \n"
+      "  </element>                                  \n"
       "  </optional>                                 \n"
       "  </interleave>                               \n"
       "                                              \n"
@@ -251,22 +251,22 @@ std::string BatchReactor::schema() {
       "                                              \n"
       "  <!-- Trade Preferences  -->                 \n"
       "  <optional>                                  \n"
-      "  <oneOrMore>                                 \n"
       "  <element name=\"commod_pref\">              \n"
+      "  <oneOrMore>                                 \n"
       "   <element name=\"incommodity\">             \n"
       "     <data type=\"string\"/>                  \n"
       "   </element>                                 \n"
       "   <element name=\"preference\">              \n"
       "     <data type=\"double\"/>                  \n"
       "   </element>                                 \n"
-      "  </element>                                  \n"
       "  </oneOrMore>                                \n"
+      "  </element>                                  \n"
       "  </optional>                                 \n"
       "                                              \n"
       "  <!-- Trade Preference Changes  -->          \n"
       "  <optional>                                  \n"
-      "  <oneOrMore>                                 \n"
       "  <element name=\"pref_change\">              \n"
+      "  <oneOrMore>                                 \n"
       "   <element name=\"incommodity\">             \n"
       "     <data type=\"string\"/>                  \n"
       "   </element>                                 \n"
@@ -276,8 +276,8 @@ std::string BatchReactor::schema() {
       "   <element name=\"time\">                    \n"
       "     <data type=\"nonNegativeInteger\"/>      \n"
       "   </element>                                 \n"
-      "  </element>                                  \n"
       "  </oneOrMore>                                \n"
+      "  </element>                                  \n"
       "  </optional>                                 \n";
 }
 
@@ -436,35 +436,35 @@ void BatchReactor::InfileToDb(cyclus::InfileTree* qe, cyclus::DbInit di) {
   }
 
   // trade preferences
-  int nprefs = qe->NMatches("commod_pref");
+  InfileTree* tps = qe->SubTree("pref_change");
+  int nprefs = tps->NMatches("incommodity");
   std::string c;
   for (int i = 0; i < nprefs; i++) {
-    InfileTree* cp = qe->SubTree("commod_pref", i);
     di.NewDatum("CommodPrefs")
-        ->AddVal("incommodity", cp->GetString("incommodity"))
-        ->AddVal("preference", Query<double>(cp, "preference"))
+        ->AddVal("incommodity", tps->GetString("incommodity", i))
+        ->AddVal("preference", Query<double>(tps, "preference", i))
         ->Record();
   }
 
   // pref changes
-  int nchanges = qe->NMatches("pref_change");
+  InfileTree* pcs = qe->SubTree("pref_change");
+  int nchanges = pcs->NMatches("incommodity");
   for (int i = 0; i < nchanges; i++) {
-    InfileTree* cp = qe->SubTree("pref_change", i);
     di.NewDatum("PrefChanges")
-        ->AddVal("incommodity", cp->GetString("incommodity"))
-        ->AddVal("new_pref", Query<double>(cp, "new_pref"))
-        ->AddVal("time", Query<int>(cp, "time"))
+        ->AddVal("incommodity", pcs->GetString("incommodity", i))
+        ->AddVal("new_pref", Query<double>(pcs, "new_pref", i))
+        ->AddVal("time", Query<int>(pcs, "time", i))
         ->Record();
   }
 
   // recipe changes
-  nchanges = qe->NMatches("recipe_change");
+  InfileTree* rcs = qe->SubTree("recipe_change");
+  nchanges = rcs->NMatches("incommodity");
   for (int i = 0; i < nchanges; i++) {
-    InfileTree* cp = qe->SubTree("recipe_change", i);
     di.NewDatum("RecipeChanges")
-        ->AddVal("incommodity", cp->GetString("incommodity"))
-        ->AddVal("new_recipe", cp->GetString("new_recipe"))
-        ->AddVal("time", Query<int>(cp, "time"))
+        ->AddVal("incommodity", rcs->GetString("incommodity", i))
+        ->AddVal("new_recipe", rcs->GetString("new_recipe", i))
+        ->AddVal("time", Query<int>(rcs, "time", i))
         ->Record();
   }
 }
