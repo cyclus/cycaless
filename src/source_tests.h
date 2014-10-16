@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_SOURCE_TESTS_H_
-#define CYCAMORE_SRC_SOURCE_TESTS_H_
+#ifndef CYCALESS_SRC_SOURCE_TESTS_H_
+#define CYCALESS_SRC_SOURCE_TESTS_H_
 #include "source.h"
 
 #include <gtest/gtest.h>
@@ -17,7 +17,7 @@ class SourceTest : public ::testing::Test {
  public:
   cyclus::TestContext tc;
   TestFacility* trader;
-  cycamore::Source* src_facility;
+  cycaless::Source* src_facility;
   std::string commod, recipe_name;
   double capacity;
   cyclus::Composition::Ptr recipe;
@@ -31,4 +31,4 @@ class SourceTest : public ::testing::Test {
       GetContext(int nreqs, std::string commodity);
 };
 
-#endif  // CYCAMORE_SRC_SOURCE_TESTS_H_
+#endif  // CYCALESS_SRC_SOURCE_TESTS_H_

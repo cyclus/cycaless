@@ -11,7 +11,7 @@
     <spec><lib>agents</lib><name>Sink</name></spec>
     <spec><lib>agents</lib><name>Source</name></spec>
     <spec><lib>agents</lib><name>NullRegion</name></spec>
-    <spec><lib>cycamore</lib><name>DeployInst</name></spec>
+    <spec><lib>cycaless</lib><name>DeployInst</name></spec>
   </archetypes>
 
   <facility>

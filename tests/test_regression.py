@@ -20,10 +20,10 @@ def setup():
     with open("reflist.json") as f:
         refs = json.load(f)
     cyclus_ref = refs[-1]["cyclus-ref"]
-    cycamore_ref = refs[-1]["cycamore-ref"]
+    cycaless_ref = refs[-1]["cycaless-ref"]
     refs = [r for r in refs 
             if r["cyclus-ref"] == cyclus_ref 
-            and r["cycamore-ref"] == cycamore_ref]
+            and r["cycaless-ref"] == cycaless_ref]
     base_url = "http://regtests.fuelcycle.org/"
     for r in refs:
         fpath = os.path.join(fetchdir, r["fname"])

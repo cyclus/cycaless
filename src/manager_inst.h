@@ -1,9 +1,9 @@
-#ifndef CYCAMORE_SRC_MANAGER_INST_H_
-#define CYCAMORE_SRC_MANAGER_INST_H_
+#ifndef CYCALESS_SRC_MANAGER_INST_H_
+#define CYCALESS_SRC_MANAGER_INST_H_
 
 #include "cyclus.h"
 
-namespace cycamore {
+namespace cycaless {
 
 /// @class ManagerInst
 /// @section introduction Introduction
@@ -52,6 +52,6 @@ class ManagerInst
   std::vector<std::string> prototypes;
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_MANAGER_INST_H_
+#endif  // CYCALESS_SRC_MANAGER_INST_H_

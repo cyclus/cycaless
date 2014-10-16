@@ -1,5 +1,5 @@
 ###################################################
-Cycamore : The CYClus Additional MOdules REpository
+Cycaless : The CYClus Additional MOdules REpository
 ###################################################
 
 Additional modules for the Cyclus nuclear fuel cycle simulator from the
@@ -7,14 +7,14 @@ University of Wisconsin - Madison are intended to be support innovative
 fuel cycle simulations with the Cyclus fuel cycle simulator.
 
 To see user and developer documentation for this code, please visit
-the `Cycamore Homepage`_.
+the `Cycaless Homepage`_.
 
 ********************************
-Building and Installing Cycamore
+Building and Installing Cycaless
 ********************************
 
 In order to facilitate future compatibility with multiple platforms,
-Cycamore is built using `CMake`_. A full list of the Cycamore package
+Cycaless is built using `CMake`_. A full list of the Cycaless package
 dependencies is show below:
 
 ====================   ==================
@@ -29,7 +29,7 @@ Package                Minimum Version
 As with all software, the build/install can be broken into two steps:
 
   #. building and installing the dependencies
-  #. building and installing Cycamore
+  #. building and installing Cycaless
 
 Installing Dependencies
 =======================
@@ -43,7 +43,7 @@ Cyclus
 ------
 
 The Cyclus Library is the simulation-engine core of the more general Cyclus
-package, of which Cycamore is a part. Detailed build/install instructions are
+package, of which Cycaless is a part. Detailed build/install instructions are
 provided in the `Cyclus readme`_. We assume that the user has successfully built
 and installed Cyclus (as well as CMake) for the following discussion.
 
@@ -83,20 +83,20 @@ be used because they are an industry standard. Accordingly, we suggest
 simply installing libboost-all-dev to limit any headaches due to
 possible dependency additions in the future.
 
-Installing Cycamore
+Installing Cycaless
 ===================
 
 Assuming you have the dependencies installed correctly, it's pretty
-straightforward to install Cycamore. We make the following assumptions
+straightforward to install Cycaless. We make the following assumptions
 in this guide:
 
   #. there is some master directory in which you're placing all
      Cyclus-related files called .../cyclus
   #. you have a directory named .../cyclus/install in which you plan
      to install all Cyclus-related files
-  #. you have acquired the Cycamore source code from the
-     `Cycamore repo`_
-  #. you have placed the Cycamore repository in .../cyclus/cycamore
+  #. you have acquired the Cycaless source code from the
+     `Cycaless repo`_
+  #. you have placed the Cycaless repository in .../cyclus/cycaless
   #. you have installed Cyclus  in .../cyclus/install (see the `Cyclus readme`_)
 
 Under these assumptions **and** if you used a package manager to
@@ -105,7 +105,7 @@ Cyclus building and installation process will look like:
 
 .. code-block:: bash
 
-    .../cyclus/cycamore$ python install.py --prefix=../install --cyclus_root=../install
+    .../cyclus/cycaless$ python install.py --prefix=../install --cyclus_root=../install
 
 If you have installed coin-Cbc from source or otherwise have it
 installed in a non-standard location, you should make use of the
@@ -114,7 +114,7 @@ like:
 
 .. code-block:: bash
 
-    .../cyclus/cycamore$ python install.py --prefix=../install --coin_root=/path/to/coin --cyclus_root=../install
+    .../cyclus/cycaless$ python install.py --prefix=../install --coin_root=/path/to/coin --cyclus_root=../install
 
 Additionally, if you have installed Boost from source or otherwise have it
 installed in a non-standard location, you should make use of the
@@ -123,7 +123,7 @@ like:
 
 .. code-block:: bash
 
-    .../cyclus/cycamore$ python install.py --prefix=../install --coin_root=/path/to/coin --cyclus_root=../install --boost_root=/path/to/boost
+    .../cyclus/cycaless$ python install.py --prefix=../install --coin_root=/path/to/coin --cyclus_root=../install --boost_root=/path/to/boost
 
 
 .. _`CMake`: http://www.cmake.org
@@ -131,15 +131,15 @@ like:
 .. _`Cyclus Homepage`: http://cyclus.github.com
 .. _`Cyclus repo`: https://github.com/cyclus/cyclus
 .. _`Cyclus readme`: http://github.com/cyclus/cyclus
-.. _`Cycamore Homepage`: http://cycamore.github.com
-.. _`Cycamore repo`: https://github.com/cyclus/cycamore
-.. _`Cycamore readme`: https://github.com/cyclus/cycamore
+.. _`Cycaless Homepage`: http://cycaless.github.com
+.. _`Cycaless repo`: https://github.com/cyclus/cycaless
+.. _`Cycaless readme`: https://github.com/cyclus/cycaless
 
 **********************
 The Developer Workflow
 **********************
 
-*Note that "upstream" repository refers to the primary `cyclus/cycamore` repository.*
+*Note that "upstream" repository refers to the primary `cyclus/cycaless` repository.*
 
 As you do your development, push primarily only to your own fork. Push to
 the upstream repository (usually the "develop" branch) only after:
@@ -161,7 +161,7 @@ Workflow Notes
   * Use a branching workflow similar to the one described at
     http://progit.org/book/ch3-4.html.
 
-  * The "develop" branch is how cycamore developers will share (generally compilable) progress
+  * The "develop" branch is how cycaless developers will share (generally compilable) progress
     when we are not yet ready for the code to become 'production'.
 
   * Keep your own "master" and "develop" branches in sync with the upstream repository's
@@ -192,22 +192,22 @@ Workflow Notes
   * **Passing Tests**
 
       - To check that your branch passes the tests, you must build and install your topic
-        branch and then run the CycamoreUnitTestDriver (at the moment, ```make
+        branch and then run the CycalessUnitTestDriver (at the moment, ```make
         test``` is insufficient). For example ::
 
           mkdir install
           python install.py --prefix=../install ...
-          ../install/cycamore/bin/CycamoreUnitTestDriver
+          ../install/cycaless/bin/CycalessUnitTestDriver
 
       - There are also a suite of sample input files
-        In addition to the CycamoreUnitTestDriver, a suite of input files can be run and
+        In addition to the CycalessUnitTestDriver, a suite of input files can be run and
         tested using the run_inputs.py script that is configured, built, and installed
-        with Cycamore. It relies on the input files that are part of your Cycamore
+        with Cycaless. It relies on the input files that are part of your Cycaless
         repository, and only succeeds for input files that are correct (some may have
-        known issues. See the issue list in cycamore for details.) To run the example
+        known issues. See the issue list in cycaless for details.) To run the example
         input files, ::
 
-          python ../install/cycamore/bin/run_inputs.py
+          python ../install/cycaless/bin/run_inputs.py
 
   * **Making a Pull Request**
 
@@ -286,25 +286,25 @@ call this branch "Work". So, when all is said and done, in our fork there will b
 three branches: "Master", "Develop", and "Work".
 
 
-Acquiring Cycamore and Workflow
+Acquiring Cycaless and Workflow
 -------------------------------
 
-We begin with a fork of the main ("upstream") Cycamore repository. After initially forking
+We begin with a fork of the main ("upstream") Cycaless repository. After initially forking
 the repo, we will have two branches in our fork: "Master" and "Develop".
 
-Acquiring a Fork of the Cycamore Repository
+Acquiring a Fork of the Cycaless Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A fork is *your* copy of Cycamore. Github offers an excelent
+A fork is *your* copy of Cycaless. Github offers an excelent
 `tutorial <http://help.github.com/fork-a-repo/>`_ on how to set one up. The rest of this
-example assumes you have set up the "upstream" repository as cyclus/cycamore. Note that git
+example assumes you have set up the "upstream" repository as cyclus/cycaless. Note that git
 refers to your fork as "origin".
 
 First, let's make our "work" branch:
 ::
 
-    .../cycamore_dir/$ git branch work
-    .../cycamore_dir/$ git push origin work
+    .../cycaless_dir/$ git branch work
+    .../cycaless_dir/$ git push origin work
 
 
 We now have the following situation: there exists the "upstream" copy of the Master and
@@ -325,15 +325,15 @@ say some time has passed), and want to continue working a bit (you're industriou
 or a grad student). To begin, let's update our *home's local branches*.
 ::
 
-    .../cycamore_dir/$ git checkout develop
-    .../cycamore_dir/$ git pull origin develop
-    .../cycamore_dir/$ git pull upstream develop
-    .../cycamore_dir/$ git push origin develop
+    .../cycaless_dir/$ git checkout develop
+    .../cycaless_dir/$ git pull origin develop
+    .../cycaless_dir/$ git pull upstream develop
+    .../cycaless_dir/$ git push origin develop
 
-    .../cycamore_dir/$ git checkout work
-    .../cycamore_dir/$ git pull origin work
-    .../cycamore_dir/$ git merge develop
-    .../cycamore_dir/$ git push origin work
+    .../cycaless_dir/$ git checkout work
+    .../cycaless_dir/$ git pull origin work
+    .../cycaless_dir/$ git merge develop
+    .../cycaless_dir/$ git push origin work
 
 Perhaps a little explanation is required. We first want to make sure that this new local copy of
 the develop branch is up-to-date with respect to the remote origin's branch and remote upstream's

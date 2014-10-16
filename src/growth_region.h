@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_GROWTH_REGION_H_
-#define CYCAMORE_SRC_GROWTH_REGION_H_
+#ifndef CYCALESS_SRC_GROWTH_REGION_H_
+#define CYCALESS_SRC_GROWTH_REGION_H_
 
 #include <set>
 #include <vector>
@@ -8,14 +8,14 @@
 
 
 // forward declarations
-namespace cycamore {
+namespace cycaless {
 class GrowthRegion;
-}  // namespace cycamore
+}  // namespace cycaless
 
 // forward includes
 #include "growth_region_tests.h"
 
-namespace cycamore {
+namespace cycaless {
 /// This region determines if there is a need to meet a certain
 /// capacity (as defined via input) at each time step. If there is
 /// such a need, the region will determine how many of each facility
@@ -117,6 +117,6 @@ class GrowthRegion : public cyclus::Region {
   void OrderBuild(cyclus::Agent* builder, cyclus::Agent* prototype);
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_GROWTH_REGION_H_
+#endif  // CYCALESS_SRC_GROWTH_REGION_H_

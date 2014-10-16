@@ -1,12 +1,12 @@
-#ifndef CYCAMORE_SRC_SOURCE_H_
-#define CYCAMORE_SRC_SOURCE_H_
+#ifndef CYCALESS_SRC_SOURCE_H_
+#define CYCALESS_SRC_SOURCE_H_
 
 #include <set>
 #include <vector>
 
 #include "cyclus.h"
 
-namespace cycamore {
+namespace cycaless {
 
 class Context;
 
@@ -197,6 +197,6 @@ class Source : public cyclus::Facility,
   // ---
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_SOURCE_H_
+#endif  // CYCALESS_SRC_SOURCE_H_

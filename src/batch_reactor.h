@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_BATCH_REACTOR_H_
-#define CYCAMORE_SRC_BATCH_REACTOR_H_
+#ifndef CYCALESS_SRC_BATCH_REACTOR_H_
+#define CYCALESS_SRC_BATCH_REACTOR_H_
 
 #include <map>
 #include <queue>
@@ -8,14 +8,14 @@
 #include "cyclus.h"
 
 // forward declarations
-namespace cycamore {
+namespace cycaless {
 class BatchReactor;
-}  // namespace cycamore
+}  // namespace cycaless
 namespace cyclus {
 class Context;
 }  // namespace cyclus
 
-namespace cycamore {
+namespace cycaless {
 
 /// @class BatchReactor
 ///
@@ -440,6 +440,6 @@ class BatchReactor
   // ---
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_BATCH_REACTOR_H_
+#endif  // CYCALESS_SRC_BATCH_REACTOR_H_

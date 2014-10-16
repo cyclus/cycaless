@@ -1,11 +1,11 @@
-#ifndef CYCAMORE_SRC_ENRICHMENT_FACILITY_H_
-#define CYCAMORE_SRC_ENRICHMENT_FACILITY_H_
+#ifndef CYCALESS_SRC_ENRICHMENT_FACILITY_H_
+#define CYCALESS_SRC_ENRICHMENT_FACILITY_H_
 
 #include <string>
 
 #include "cyclus.h"
 
-namespace cycamore {
+namespace cycaless {
 
 /// @class SWUConverter
 ///
@@ -300,6 +300,6 @@ class EnrichmentFacility : public cyclus::Facility {
   // ---
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_ENRICHMENT_FACILITY_H_
+#endif  // CYCALESS_SRC_ENRICHMENT_FACILITY_H_

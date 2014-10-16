@@ -25,7 +25,7 @@ def check_windows_cmake(cmake_cmd):
             cmake_cmd += ['-G "MinGW Makefiles"']
         cmake_cmd = ' '.join(cmake_cmd)
 
-def install_cycamore(args):
+def install_cycaless(args):
     if not os.path.exists(args.build_dir):
         os.mkdir(args.build_dir)
     elif args.replace:
@@ -67,17 +67,17 @@ def install_cycamore(args):
     rtn = subprocess.check_call(make_cmd, cwd=args.build_dir,
                                 shell=(os.name == 'nt'))
 
-def uninstall_cycamore(args):
+def uninstall_cycaless(args):
     makefile = os.path.join(args.build_dir, 'Makefile')
     if not os.path.exists(args.build_dir) or not os.path.exists(makefile):
-        sys.exist("May not uninstall cycamore since it has not yet been built.")
+        sys.exist("May not uninstall cycaless since it has not yet been built.")
     rtn = subprocess.check_call(['make', 'uninstall'], cwd=args.build_dir,
                                 shell=(os.name == 'nt'))
 
 def main():
     localdir = absexpanduser('~/.local')
 
-    description = "A Cycamore installation helper script. "+\
+    description = "A Cycaless installation helper script. "+\
         "For more information, please see cyclus.github.com."
 
     parser = ap.ArgumentParser(description=description)
@@ -121,9 +121,9 @@ def main():
 
     args = parser.parse_args()
     if args.uninstall:
-        uninstall_cycamore(args)
+        uninstall_cycaless(args)
     else:
-        install_cycamore(args)
+        install_cycaless(args)
 
 if __name__ == "__main__":
     main()

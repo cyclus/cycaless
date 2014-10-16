@@ -4,7 +4,7 @@
 #include <sstream>
 #include <cmath>
 
-namespace cycamore {
+namespace cycaless {
 
 // static members
 std::map<BatchReactor::Phase, std::string> BatchReactor::phase_names_ =
@@ -1046,4 +1046,4 @@ extern "C" cyclus::Agent* ConstructBatchReactor(cyclus::Context* ctx) {
   return new BatchReactor(ctx);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless

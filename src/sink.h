@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_SINK_H_
-#define CYCAMORE_SRC_SINK_H_
+#ifndef CYCALESS_SRC_SINK_H_
+#define CYCALESS_SRC_SINK_H_
 
 #include <algorithm>
 #include <string>
@@ -8,7 +8,7 @@
 
 #include "cyclus.h"
 
-namespace cycamore {
+namespace cycaless {
 
 class Context;
 
@@ -185,6 +185,6 @@ class Sink : public cyclus::Facility  {
   cyclus::toolkit::ResourceBuff inventory;
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_SINK_H_
+#endif  // CYCALESS_SRC_SINK_H_

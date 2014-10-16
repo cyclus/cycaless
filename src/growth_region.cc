@@ -1,7 +1,7 @@
 // Implements the GrowthRegion class
 #include "growth_region.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GrowthRegion::GrowthRegion(cyclus::Context* ctx) : cyclus::Region(ctx) {
@@ -150,4 +150,4 @@ extern "C" cyclus::Agent* ConstructGrowthRegion(cyclus::Context* ctx) {
   return new GrowthRegion(ctx);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless

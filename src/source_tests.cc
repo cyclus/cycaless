@@ -10,7 +10,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void SourceTest::SetUp() {
-  src_facility = new cycamore::Source(tc.get());
+  src_facility = new cycaless::Source(tc.get());
   trader = tc.trader();
   InitParameters();
   SetUpSource();
@@ -49,7 +49,7 @@ TEST_F(SourceTest, InitialState) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(SourceTest, Clone) {
   cyclus::Context* ctx = tc.get();
-  cycamore::Source* cloned_fac = dynamic_cast<cycamore::Source*>
+  cycaless::Source* cloned_fac = dynamic_cast<cycaless::Source*>
                                          (src_facility->Clone());
 
   EXPECT_EQ(src_facility->commodity(), cloned_fac->commodity());
@@ -189,7 +189,7 @@ SourceTest::GetContext(int nreqs, std::string commod) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* SourceConstructor(cyclus::Context* ctx) {
-  return new cycamore::Source(ctx);
+  return new cycaless::Source(ctx);
 }
 
 // required to get functionality in cyclus agent unit tests library

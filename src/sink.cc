@@ -6,7 +6,7 @@
 
 #include "sink.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Sink::Sink(cyclus::Context* ctx)
@@ -18,23 +18,23 @@ Sink::Sink(cyclus::Context* ctx)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Sink::~Sink() {}
 
-#pragma cyclus def schema cycamore::Sink
+#pragma cyclus def schema cycaless::Sink
 
-#pragma cyclus def annotations cycamore::Sink
+#pragma cyclus def annotations cycaless::Sink
 
-#pragma cyclus def infiletodb cycamore::Sink
+#pragma cyclus def infiletodb cycaless::Sink
 
-#pragma cyclus def snapshot cycamore::Sink
+#pragma cyclus def snapshot cycaless::Sink
 
-#pragma cyclus def snapshotinv cycamore::Sink
+#pragma cyclus def snapshotinv cycaless::Sink
 
-#pragma cyclus def initinv cycamore::Sink
+#pragma cyclus def initinv cycaless::Sink
 
-#pragma cyclus def clone cycamore::Sink
+#pragma cyclus def clone cycaless::Sink
 
-#pragma cyclus def initfromdb cycamore::Sink
+#pragma cyclus def initfromdb cycaless::Sink
 
-#pragma cyclus def initfromcopy cycamore::Sink
+#pragma cyclus def initfromcopy cycaless::Sink
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 std::string Sink::str() {
@@ -175,4 +175,4 @@ extern "C" cyclus::Agent* ConstructSink(cyclus::Context* ctx) {
   return new Sink(ctx);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless

@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_BATCH_REACTOR_TESTS_H_
-#define CYCAMORE_SRC_BATCH_REACTOR_TESTS_H_
+#ifndef CYCALESS_SRC_BATCH_REACTOR_TESTS_H_
+#define CYCALESS_SRC_BATCH_REACTOR_TESTS_H_
 
 #include <gtest/gtest.h>
 
@@ -9,7 +9,7 @@
 #include "batch_reactor.h"
 #include "test_context.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class BatchReactorTest : public ::testing::Test {
@@ -67,6 +67,6 @@ class BatchReactorTest : public ::testing::Test {
   void TestBatchOut(int n_core, int n_storage);
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_BATCH_REACTOR_TESTS_H_
+#endif  // CYCALESS_SRC_BATCH_REACTOR_TESTS_H_

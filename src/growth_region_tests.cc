@@ -2,12 +2,12 @@
 
 #include "growth_region_tests.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void GrowthRegionTests::SetUp() {
   ctx = new cyclus::Context(&ti, &rec);
-  region = new cycamore::GrowthRegion(ctx);
+  region = new cycaless::GrowthRegion(ctx);
   commodity_name = "commod";
   demand_type = "linear";
   demand_params = "5 5";
@@ -33,11 +33,11 @@ TEST_F(GrowthRegionTests, init) {
   EXPECT_TRUE(ManagesCommodity(commodity));
 }
 
-}  // namespace cycamore
+}  // namespace cycaless
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* GrowthRegionConstructor(cyclus::Context* ctx) {
-  return new cycamore::GrowthRegion(ctx);
+  return new cycaless::GrowthRegion(ctx);
 }
 
 // required to get functionality in cyclus agent unit tests library

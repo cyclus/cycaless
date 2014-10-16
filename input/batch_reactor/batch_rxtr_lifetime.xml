@@ -10,11 +10,11 @@ reasonably for its lifetime. -->
 
   <archetypes>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>Source</name>
     </spec>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>BatchReactor</name>
     </spec>
     <spec>
@@ -26,7 +26,7 @@ reasonably for its lifetime. -->
       <name>NullInst</name>
     </spec>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>Sink</name>
     </spec>
   </archetypes>

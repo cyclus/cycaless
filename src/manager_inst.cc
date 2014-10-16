@@ -1,7 +1,7 @@
 // Implements the ManagerInst class
 #include "manager_inst.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ManagerInst::ManagerInst(cyclus::Context* ctx) : cyclus::Institution(ctx) {
@@ -91,4 +91,4 @@ extern "C" cyclus::Agent* ConstructManagerInst(cyclus::Context* ctx) {
   return new ManagerInst(ctx);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless

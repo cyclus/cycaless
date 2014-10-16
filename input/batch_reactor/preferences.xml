@@ -13,15 +13,15 @@ commodity. -->
 
   <archetypes>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>Source</name>
     </spec>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>BatchReactor</name>
     </spec>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>Sink</name>
     </spec>
     <spec>

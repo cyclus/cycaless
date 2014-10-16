@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 #taken from http://geant4.cern.ch/support/source/geant4/CMakeLists.txt
 IF(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
-    message(STATUS "Cycamore requires an out-of-source build.")
+    message(STATUS "Cycaless requires an out-of-source build.")
     message(STATUS "Please remove these files from ${CMAKE_BINARY_DIR} first:")
     message(STATUS "CMakeCache.txt")
     message(STATUS "CMakeFiles")
@@ -10,8 +10,8 @@ IF(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     message(FATAL_ERROR "in-source build detected")
 ENDIF()
 
-# This project name is cycamore.
-PROJECT(CYCAMORE)
+# This project name is cycaless.
+PROJECT(CYCALESS)
 
 # quiets fortify_source warnings when not compiling with optimizations
 # in linux distros where compilers were compiled with fortify_source enabled by
@@ -25,27 +25,27 @@ ENDIF()
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overflow")
 
 # Direct any out-of-source builds to this directory
-SET(CYCAMORE_SOURCE_DIR ${CMAKE_SOURCE_DIR})
+SET(CYCALESS_SOURCE_DIR ${CMAKE_SOURCE_DIR})
 
 IF(NOT CYCLUS_DOC_ONLY)
     # Direct any binary installation paths to this directory
-    SET(CYCAMORE_BINARY_DIR ${CMAKE_BINARY_DIR})
+    SET(CYCALESS_BINARY_DIR ${CMAKE_BINARY_DIR})
 
     # This makes all the libraries build as SHARED
     SET(BUILD_SHARED_LIBS true)
 
     # Setup build locations.
     IF(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-        SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CYCAMORE_BINARY_DIR}/bin)
+        SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CYCALESS_BINARY_DIR}/bin)
     endif()
     IF(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
-        SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CYCAMORE_BINARY_DIR}/lib)
+        SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CYCALESS_BINARY_DIR}/lib)
     endif()
     IF(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
-        SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CYCAMORE_BINARY_DIR}/lib)
+        SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CYCALESS_BINARY_DIR}/lib)
     ENDIF()
 
-    SET(CYCAMORE_EXECUTABLE_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    SET(CYCALESS_EXECUTABLE_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
     # use, i.e. don't skip the full RPATH for the build tree
     SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
@@ -68,7 +68,7 @@ IF(NOT CYCLUS_DOC_ONLY)
 
     # Tell CMake where the modules are
     SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_DIR}/share/cmake-2.8/Modules")
-    SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CYCAMORE_SOURCE_DIR}/cmake)
+    SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CYCALESS_SOURCE_DIR}/cmake)
     MESSAGE("CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}")
 
     # Include macros
@@ -76,12 +76,12 @@ IF(NOT CYCLUS_DOC_ONLY)
 
     # Find cyclus
     FIND_PACKAGE(Cyclus REQUIRED)
-    SET(CYCAMORE_INCLUDE_DIR ${CYCAMORE_INCLUDE_DIR} ${CYCLUS_CORE_INCLUDE_DIR})
+    SET(CYCALESS_INCLUDE_DIR ${CYCALESS_INCLUDE_DIR} ${CYCLUS_CORE_INCLUDE_DIR})
     SET(LIBS ${LIBS} ${CYCLUS_CORE_LIBRARIES})
 
     # Find LibXML++ and dependencies
     FIND_PACKAGE(LibXML++ REQUIRED)
-    SET(CYCAMORE_INCLUDE_DIR ${CYCAMORE_INCLUDE_DIR} ${LibXML++_INCLUDE_DIR} ${Glibmm_INCLUDE_DIRS} ${LibXML++Config_INCLUDE_DIR})
+    SET(CYCALESS_INCLUDE_DIR ${CYCALESS_INCLUDE_DIR} ${LibXML++_INCLUDE_DIR} ${Glibmm_INCLUDE_DIRS} ${LibXML++Config_INCLUDE_DIR})
     SET(LIBS ${LIBS} ${LibXML++_LIBRARIES})
     MESSAGE("--LIBS: ${LIBS}")
 
@@ -91,7 +91,7 @@ IF(NOT CYCLUS_DOC_ONLY)
     SET(Boost_USE_STATIC_LIBS       OFF)
     SET(Boost_USE_STATIC_RUNTIME    OFF)
     FIND_PACKAGE(Boost COMPONENTS filesystem system REQUIRED)
-    SET(CYCAMORE_INCLUDE_DIR ${CYCAMORE_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
+    SET(CYCALESS_INCLUDE_DIR ${CYCALESS_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
     SET(LIBS ${LIBS} ${Boost_FILESYSTEM_LIBRARY})
     SET(LIBS ${LIBS} ${Boost_SYSTEM_LIBRARY})
 
@@ -110,11 +110,11 @@ IF(NOT CYCLUS_DOC_ONLY)
     set(LIBS ${LIBS} ${COIN_LIBRARIES})
 
     # include the agent directories
-    SET(CYCAMORE_INCLUDE_DIR ${CYCAMORE_INCLUDE_DIR} tests
+    SET(CYCALESS_INCLUDE_DIR ${CYCALESS_INCLUDE_DIR} tests
         ${CYCLUS_CORE_INCLUDE_DIR}/..)
 
     # include all the directories we just found
-    INCLUDE_DIRECTORIES(${CYCAMORE_INCLUDE_DIR}
+    INCLUDE_DIRECTORIES(${CYCALESS_INCLUDE_DIR}
         ${COIN_INCLUDE_DIRS})
 
 
@@ -129,7 +129,7 @@ IF(NOT CYCLUS_DOC_ONLY)
     SET(GENERATED_TEST_SOURCE_LIST "" CACHE INTERNAL "")
 
     # The gtest include file directories.
-    SET(GTEST_INCLUDE_DIRS "${CYCAMORE_INCLUDE_DIR}")
+    SET(GTEST_INCLUDE_DIRS "${CYCALESS_INCLUDE_DIR}")
 
     # Alerts CMake to any tests we need to worry about
     INCLUDE_DIRECTORIES(${GTEST_INCLUDE_DIRS})
@@ -146,7 +146,7 @@ IF(NOT CYCLUS_DOC_ONLY)
 
     SET(TestSource
         ${TestSource}
-        ${CYCAMORE_TEST_CORE}
+        ${CYCALESS_TEST_CORE}
         )
 
     FIND_PACKAGE(Threads)
@@ -154,25 +154,25 @@ IF(NOT CYCLUS_DOC_ONLY)
         SET(cxx_base_flags "${cxx_base_flags} -DGTEST_HAS_PTHREAD=1")
     ENDIF()
 
-    # Build cycamore_unit_tests
-    ADD_EXECUTABLE(cycamore_unit_tests
-        tests/cycamore_unit_test_driver.cc
+    # Build cycaless_unit_tests
+    ADD_EXECUTABLE(cycaless_unit_tests
+        tests/cycaless_unit_test_driver.cc
         ${TestSource}
         )
 
-    TARGET_LINK_LIBRARIES(cycamore_unit_tests
+    TARGET_LINK_LIBRARIES(cycaless_unit_tests
         dl ${LIBS} ${CYCLUS_TEST_LIBRARIES})
 
-    INSTALL(TARGETS cycamore_unit_tests
+    INSTALL(TARGETS cycaless_unit_tests
         RUNTIME DESTINATION bin
         COMPONENT testing
         )
 
     # read tests after building the driver, and add them to ctest
-    set(tgt "cycamore_unit_tests")
-    set(script "${CYCAMORE_SOURCE_DIR}/config/generate_test_macros.py")
+    set(tgt "cycaless_unit_tests")
+    set(script "${CYCALESS_SOURCE_DIR}/config/generate_test_macros.py")
     set(exec "--executable=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${tgt}")
-    set(reg_dir "--reg_dir=${CYCAMORE_SOURCE_DIR}/../${test_dir}")
+    set(reg_dir "--reg_dir=${CYCALESS_SOURCE_DIR}/../${test_dir}")
     set(out "--output=${CMAKE_BINARY_DIR}/CTestTestfile.cmake")
     add_custom_command(TARGET ${tgt}
         POST_BUILD
@@ -195,7 +195,7 @@ IF(NOT CYCLUS_DOC_ONLY)
         IMMEDIATE @ONLY)
 
     # AMS: I don't believe that this is needed anymore.
-    # This just copies the shared dir from cyclus to cycamore.
+    # This just copies the shared dir from cyclus to cycaless.
     # However, the 'share/' dir should now be the same.  So this
     # was failing because you can't copy a file to itself.
     #FILE(GLOB cyclus_shared "${CYCLUS_CORE_SHARE_DIR}/*")
@@ -205,10 +205,10 @@ IF(NOT CYCLUS_DOC_ONLY)
     # )
 
     # Here we set some components for installation with cpack
-    SET(CPACK_COMPONENTS_ALL cycamore testing libraries data core)
+    SET(CPACK_COMPONENTS_ALL cycaless testing libraries data core)
 
     # Here's where we package it with CPack
-    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Cycamore : The Cyclus Additional Module Repository.")
+    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Cycaless : The Cyclus Additional Module Repository.")
     SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "CNERG, UW-Madison") #required
     SET(CPACK_PACKAGE_VENDOR "CNERG, UW-Madison")
     SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.rst")
@@ -216,13 +216,13 @@ IF(NOT CYCLUS_DOC_ONLY)
     SET(CPACK_PACKAGE_VERSION_MAJOR "1")
     SET(CPACK_PACKAGE_VERSION_MINOR "0")
     #SET(CPACK_PACKAGE_VERSION_PATCH "0") # should use commit number here  ?
-    SET(CPACK_PACKAGE_INSTALL_DIRECTORY "cycamore${CPACK_VERSION_MAJOR}.${CPACK_VERSION_MINOR}")
+    SET(CPACK_PACKAGE_INSTALL_DIRECTORY "cycaless${CPACK_VERSION_MAJOR}.${CPACK_VERSION_MINOR}")
     SET(CPACK_PACKAGE_NAME "${CMAKE_PROJECT_NAME}")
 
-    CONFIGURE_FILE("${CYCAMORE_SOURCE_DIR}/cmake/CycamoreCPackOptions.cmake.in"
-        "${CYCAMORE_BINARY_DIR}/cmake/CycamoreCPackOptions.cmake" @ONLY)
-    SET(CPACK_PROJECT_CONFIG_FILE "${CYCAMORE_BINARY_DIR}/cmake/CycamoreCPackOptions.cmake")
-    SET(CPACK_PACKAGE_EXECUTABLES "cycamore" "cycamore_unit_tests")
+    CONFIGURE_FILE("${CYCALESS_SOURCE_DIR}/cmake/CycalessCPackOptions.cmake.in"
+        "${CYCALESS_BINARY_DIR}/cmake/CycalessCPackOptions.cmake" @ONLY)
+    SET(CPACK_PROJECT_CONFIG_FILE "${CYCALESS_BINARY_DIR}/cmake/CycalessCPackOptions.cmake")
+    SET(CPACK_PACKAGE_EXECUTABLES "cycaless" "cycaless_unit_tests")
 
 
     INCLUDE(CPack)
@@ -234,7 +234,7 @@ IF(NOT CYCLUS_DOC_ONLY)
 ENDIF(NOT CYCLUS_DOC_ONLY)
 
 # This is the directory that holds the doxygen doxyfile template (doxy.conf.in)
-SET(DOC_INPUT_DIR ${CYCAMORE_SOURCE_DIR}/doc)
+SET(DOC_INPUT_DIR ${CYCALESS_SOURCE_DIR}/doc)
 
 # If doxygen exists, use the doc/CMakeLists.txt file for further instructions.
 FIND_PACKAGE(Doxygen)

@@ -5,7 +5,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Source::Source(cyclus::Context* ctx)
@@ -17,28 +17,28 @@ Source::Source(cyclus::Context* ctx)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Source::~Source() {}
 
-#pragma cyclus def clone cycamore::Source
+#pragma cyclus def clone cycaless::Source
 
-#pragma cyclus def schema cycamore::Source
+#pragma cyclus def schema cycaless::Source
 
-#pragma cyclus def annotations cycamore::Source
+#pragma cyclus def annotations cycaless::Source
 
-#pragma cyclus def infiletodb cycamore::Source
+#pragma cyclus def infiletodb cycaless::Source
 
-#pragma cyclus def snapshot cycamore::Source
+#pragma cyclus def snapshot cycaless::Source
 
-#pragma cyclus def snapshotinv cycamore::Source
+#pragma cyclus def snapshotinv cycaless::Source
 
-#pragma cyclus def initinv cycamore::Source
+#pragma cyclus def initinv cycaless::Source
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Source::InitFrom(Source* m) {
-  #pragma cyclus impl initfromcopy cycamore::Source
+  #pragma cyclus impl initfromcopy cycaless::Source
   cyclus::toolkit::CommodityProducer::Copy(m);
 }
 
 void Source::InitFrom(cyclus::QueryableBackend* b) {
-  #pragma cyclus impl initfromdb cycamore::Source
+  #pragma cyclus impl initfromdb cycaless::Source
 
   commod_ = cyclus::toolkit::Commodity(out_commod);
   cyclus::toolkit::CommodityProducer::Add(commod_);
@@ -168,4 +168,4 @@ extern "C" cyclus::Agent* ConstructSource(cyclus::Context* ctx) {
   return new Source(ctx);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless

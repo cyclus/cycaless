@@ -11,7 +11,7 @@
 
 #include "toolkit/commodity.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool operator==(const BatchReactor::InitCond& l,
@@ -282,7 +282,7 @@ TEST_F(BatchReactorTest, DISABLED_XMLInit) {
   cyclus::XMLParser p;
   p.Init(ss);
   cyclus::InfileTree engine(p);
-  cycamore::BatchReactor* fac = new cycamore::BatchReactor(tc_.get());
+  cycaless::BatchReactor* fac = new cycaless::BatchReactor(tc_.get());
   // fac->InitFrom(&engine);
 
   TestInitState(fac);
@@ -290,8 +290,8 @@ TEST_F(BatchReactorTest, DISABLED_XMLInit) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(BatchReactorTest, Clone) {
-  cycamore::BatchReactor* cloned_fac =
-      dynamic_cast<cycamore::BatchReactor*>(src_facility->Clone());
+  cycaless::BatchReactor* cloned_fac =
+      dynamic_cast<cycaless::BatchReactor*>(src_facility->Clone());
   TestInitState(cloned_fac);
   delete cloned_fac;
 }
@@ -379,11 +379,11 @@ TEST_F(BatchReactorTest, BatchInOut) {
   EXPECT_THROW(TestBatchOut(1, 0), cyclus::Error);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* BatchReactorConstructor(cyclus::Context* ctx) {
-  return new cycamore::BatchReactor(ctx);
+  return new cycaless::BatchReactor(ctx);
 }
 
 // required to get functionality in cyclus agent unit tests library

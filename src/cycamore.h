@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_CYCAMORE_H_
-#define CYCAMORE_SRC_CYCAMORE_H_
+#ifndef CYCALESS_SRC_CYCALESS_H_
+#define CYCALESS_SRC_CYCALESS_H_
 
 #include "version.h"
 
@@ -19,4 +19,4 @@
 #include "source.h"
 #include "source_tests.h"
 
-#endif  // CYCAMORE_SRC_CYCAMORE_H_
+#endif  // CYCALESS_SRC_CYCALESS_H_

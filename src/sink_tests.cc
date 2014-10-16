@@ -10,7 +10,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void SinkTest::SetUp() {
-  src_facility = new cycamore::Sink(tc_.get());
+  src_facility = new cycaless::Sink(tc_.get());
   trader = tc_.trader();
   InitParameters();
   SetUpSink();
@@ -54,8 +54,8 @@ TEST_F(SinkTest, InitialState) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 TEST_F(SinkTest, Clone) {
-  using cycamore::Sink;
-  Sink* cloned_fac = dynamic_cast<cycamore::Sink*>
+  using cycaless::Sink;
+  Sink* cloned_fac = dynamic_cast<cycaless::Sink*>
                              (src_facility->Clone());
 
   EXPECT_DOUBLE_EQ(0.0, cloned_fac->InventorySize());
@@ -91,7 +91,7 @@ TEST_F(SinkTest, DISABLED_XMLInit) {
   cyclus::XMLParser p;
   p.Init(ss);
   cyclus::InfileTree engine(p);
-  cycamore::Sink fac(tc_.get());
+  cycaless::Sink fac(tc_.get());
 
   // EXPECT_NO_THROW(fac.InitFrom(&engine););
   std::string arr[] = {commod1_, commod2_};
@@ -186,7 +186,7 @@ TEST_F(SinkTest, Print) {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* SinkConstructor(cyclus::Context* ctx) {
-  return new cycamore::Sink(ctx);
+  return new cycaless::Sink(ctx);
 }
 
 // required to get functionality in cyclus agent unit tests library

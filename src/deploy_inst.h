@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_DEPLOY_INST_H_
-#define CYCAMORE_SRC_DEPLOY_INST_H_
+#ifndef CYCALESS_SRC_DEPLOY_INST_H_
+#define CYCALESS_SRC_DEPLOY_INST_H_
 
 #include <utility>
 #include <set>
@@ -7,7 +7,7 @@
 
 #include "cyclus.h"
 
-namespace cycamore {
+namespace cycaless {
 
 typedef std::map<int, std::vector<std::string> > BuildSched;
 
@@ -48,6 +48,6 @@ class DeployInst : public cyclus::Institution {
   BuildSched build_sched_;
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_DEPLOY_INST_H_
+#endif  // CYCALESS_SRC_DEPLOY_INST_H_

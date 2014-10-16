@@ -11,7 +11,7 @@
 
 #include "enrichment_facility_tests.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void EnrichmentFacilityTest::SetUp() {
@@ -141,7 +141,7 @@ TEST_F(EnrichmentFacilityTest, DISABLED_XMLInit) {
   cyclus::XMLParser p;
   p.Init(ss);
   cyclus::InfileTree engine(p);
-  cycamore::EnrichmentFacility fac(tc_.get());
+  cycaless::EnrichmentFacility fac(tc_.get());
 
   // EXPECT_NO_THROW(fac.InitFrom(&engine););
   EXPECT_EQ(in_recipe, fac.InRecipe());
@@ -159,8 +159,8 @@ TEST_F(EnrichmentFacilityTest, DISABLED_XMLInit) {
 TEST_F(EnrichmentFacilityTest, Clone) {
   cyclus::Context* ctx = tc_.get();
 
-  cycamore::EnrichmentFacility* cloned_fac =
-    dynamic_cast<cycamore::EnrichmentFacility*>(src_facility->Clone());
+  cycaless::EnrichmentFacility* cloned_fac =
+    dynamic_cast<cycaless::EnrichmentFacility*>(src_facility->Clone());
 
   EXPECT_EQ(in_recipe, cloned_fac->InRecipe());
   EXPECT_EQ(in_commod, cloned_fac->in_commodity());
@@ -592,11 +592,11 @@ TEST_F(EnrichmentFacilityTest, Response) {
   EXPECT_DOUBLE_EQ(src_facility->CurrentSwuCapacity(), swu_req);
 }
 
-}  // namespace cycamore
+}  // namespace cycaless
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* EnrichmentFacilityConstructor(cyclus::Context* ctx) {
-  return new cycamore::EnrichmentFacility(ctx);
+  return new cycaless::EnrichmentFacility(ctx);
 }
 
 // required to get functionality in cyclus agent unit tests library

@@ -29,20 +29,20 @@ def gen_main(args):
     checkout(cyclus_path, args.cyclus_refspec)
     build_cyclus(build_path, install_path, prefix_path = args.cmake_prefix, boost = args.boost_root, coin = args.coin_root)
 
-    # fetch and build cycamore
-    cycamore_path = os.path.join(sandbox_path, 'cycamore')
-    build_path = prepare_repo(args.cycamore_repo, cycamore_path)
-    tags = repo_tags(cycamore_path)
-    if args.cycamore_refspec == '':
-        args.cycamore_refspec = tags[-1]
-    checkout(cycamore_path, args.cycamore_refspec)
-    build_cycamore(build_path, install_path, prefix_path = args.cmake_prefix, boost = args.boost_root, coin = args.coin_root)
+    # fetch and build cycaless
+    cycaless_path = os.path.join(sandbox_path, 'cycaless')
+    build_path = prepare_repo(args.cycaless_repo, cycaless_path)
+    tags = repo_tags(cycaless_path)
+    if args.cycaless_refspec == '':
+        args.cycaless_refspec = tags[-1]
+    checkout(cycaless_path, args.cycaless_refspec)
+    build_cycaless(build_path, install_path, prefix_path = args.cmake_prefix, boost = args.boost_root, coin = args.coin_root)
 
     # run cyclus simulations
-    sys.path.insert(0, os.path.join(cycamore_path, "tests"))
+    sys.path.insert(0, os.path.join(cycaless_path, "tests"))
     mod = importlib.import_module("test_cases")
     for infile in mod.sim_files:
-        run_cyclus(install_path, infile, args.cyclus_refspec, args.cycamore_refspec)
+        run_cyclus(install_path, infile, args.cyclus_refspec, args.cycaless_refspec)
 
     # cleanup
     shutil.rmtree(sandbox_path)
@@ -94,7 +94,7 @@ def build_cyclus(build_path, install_path, prefix_path = '', boost = '', coin = 
     sp.check_call(['make', 'install'])
     os.chdir(cwd)
 
-def build_cycamore(build_path, install_path, prefix_path = '', boost = '', coin = ''):
+def build_cycaless(build_path, install_path, prefix_path = '', boost = '', coin = ''):
     cmd = ['cmake', '..', '-DCMAKE_INSTALL_PREFIX=' + os.path.abspath(install_path), '-DCYCLUS_ROOT_DIR=' + install_path]
     if prefix_path != '':
         cmd.append('-DCMAKE_PREFIX_PATH=' + os.path.abspath(prefix_path))
@@ -110,22 +110,22 @@ def build_cycamore(build_path, install_path, prefix_path = '', boost = '', coin 
     sp.check_call(['make', 'install'])
     os.chdir(cwd)
 
-def run_cyclus(install_path, input_file, cyclus_ref, cycamore_ref):
-    out_file = encode_dbname(cyclus_ref, cycamore_ref, input_file)
+def run_cyclus(install_path, input_file, cyclus_ref, cycaless_ref):
+    out_file = encode_dbname(cyclus_ref, cycaless_ref, input_file)
     cyclus = os.path.join(install_path, 'bin', 'cyclus')
     sp.check_call([cyclus, '-o', out_file, input_file])
 
-def encode_dbname(cyclus_ref, cycamore_ref, input_file):
+def encode_dbname(cyclus_ref, cycaless_ref, input_file):
     in_name, _ = os.path.splitext(os.path.basename(input_file))
-    return cyclus_ref + '_' + cycamore_ref + '_' + in_name + '.h5'
+    return cyclus_ref + '_' + cycaless_ref + '_' + in_name + '.h5'
 
 def decode_dbname(fname):
     base, _ = os.path.splitext(fname)
     parts = base.split('_')
     cyclus_ref = parts[0]
-    cycamore_ref = parts[1]
+    cycaless_ref = parts[1]
     infile = '_'.join(parts[2:]) + '.xml'
-    return (cyclus_ref, cycamore_ref, infile)
+    return (cyclus_ref, cycaless_ref, infile)
 
 def add_main(args):
     # retrieve existing reflist
@@ -144,12 +144,12 @@ def add_main(args):
             data = f.read()
             h = hashlib.sha1()
             h.update(data)
-        (cyclus_ref, cycamore_ref, infile) = decode_dbname(refname)
+        (cyclus_ref, cycaless_ref, infile) = decode_dbname(refname)
         reflist.append({
             'fname': refname,
             'sha1-checksum': h.hexdigest(),
             'cyclus-ref': cyclus_ref,
-            'cycamore-ref': cycamore_ref,
+            'cycaless-ref': cycaless_ref,
             'input-file': infile
             })
 
@@ -168,7 +168,7 @@ def push_rackspace(fname, cred_file='rs.cred'):
     fdata = f.read()
   obj = cf.store_object("cyclus", fname, fdata)
 
-def fetch_refdbs(cyclus_ref, cycamore_ref, dst_path = '.'):
+def fetch_refdbs(cyclus_ref, cycaless_ref, dst_path = '.'):
     cwd = os.getcwd()
     os.chdir(dst_path)
     os.chdir(cwd)
@@ -182,14 +182,14 @@ if __name__ == '__main__':
     sub_gen = subs.add_parser('gen', help='create a new reference db set')
     help = 'force generate new ref-db rather than fetch remotely'
     sub_gen.add_argument('-f,--force', type=bool, help=help, default=False)
-    help = 'location of cycamore repo'
+    help = 'location of cycaless repo'
     sub_gen.add_argument('--cyclus-repo', help=help, default='https://github.com/cyclus/cyclus.git')
-    help = 'location of cycamore repo'
-    sub_gen.add_argument('--cycamore-repo', help=help, default='https://github.com/cyclus/cycamore.git')
+    help = 'location of cycaless repo'
+    sub_gen.add_argument('--cycaless-repo', help=help, default='https://github.com/cyclus/cycaless.git')
     help = 'git refspec for cyclus commit to generate reference from. Blank defaults to the most recent tag.'
     sub_gen.add_argument('--cyclus-refspec', help=help, default='')
-    help = 'git refspec for cycamore commit to generate reference from. Blank defaults to the most recent tag.'
-    sub_gen.add_argument('--cycamore-refspec', help=help, default='')
+    help = 'git refspec for cycaless commit to generate reference from. Blank defaults to the most recent tag.'
+    sub_gen.add_argument('--cycaless-refspec', help=help, default='')
     help = 'the relative path to the Coin-OR libraries directory'
     sub_gen.add_argument('--coin-root', help=help, default = '')
     help = 'the relative path to the Boost libraries directory'

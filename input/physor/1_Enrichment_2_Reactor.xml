@@ -9,11 +9,11 @@
 
   <archetypes>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>EnrichmentFacility</name>
     </spec>
     <spec>
-      <lib>cycamore</lib>
+      <lib>cycaless</lib>
       <name>BatchReactor</name>
     </spec>
     <spec>

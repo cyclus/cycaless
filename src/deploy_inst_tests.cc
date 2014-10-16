@@ -7,7 +7,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cyclus::Agent* DeployInstitutionConstructor(cyclus::Context* ctx) {
-  return new cycamore::DeployInst(ctx);
+  return new cycaless::DeployInst(ctx);
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

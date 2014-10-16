@@ -1,5 +1,5 @@
-#ifndef CYCAMORE_SRC_ENRICHMENT_FACILITY_TESTS_
-#define CYCAMORE_SRC_ENRICHMENT_FACILITY_TESTS_
+#ifndef CYCALESS_SRC_ENRICHMENT_FACILITY_TESTS_
+#define CYCALESS_SRC_ENRICHMENT_FACILITY_TESTS_
 
 #include <gtest/gtest.h>
 
@@ -12,7 +12,7 @@
 
 #include "enrichment_facility.h"
 
-namespace cycamore {
+namespace cycaless {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 class EnrichmentFacilityTest : public ::testing::Test {
@@ -45,6 +45,6 @@ class EnrichmentFacilityTest : public ::testing::Test {
       GetContext(int nreqs, int nvalid);
 };
 
-}  // namespace cycamore
+}  // namespace cycaless
 
-#endif  // CYCAMORE_SRC_ENRICHMENT_FACILITY_TESTS_
+#endif  // CYCALESS_SRC_ENRICHMENT_FACILITY_TESTS_
