@@ -30,7 +30,7 @@ void DeployInst::InfileToDb(cyclus::InfileTree* qe, cyclus::DbInit di) {
   cyclus::Institution::InfileToDb(qe, di);
   qe = qe->SubTree("config/*");
   cyclus::InfileTree* orders = qe->SubTree("buildorder");
-  int nOrders = qe->NMatches("prototype");
+  int nOrders = orders->NMatches("prototype");
   for (int i = 0; i < nOrders; i++) {
     int n = cyclus::Query<int>(orders, "number", i);
     for (int j = 0; j < n; ++j) {
