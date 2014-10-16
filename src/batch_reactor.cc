@@ -1,6 +1,7 @@
 // Implements the BatchReactor class
 #include "batch_reactor.h"
 
+#include <iostream>
 #include <sstream>
 #include <cmath>
 
@@ -436,36 +437,48 @@ void BatchReactor::InfileToDb(cyclus::InfileTree* qe, cyclus::DbInit di) {
   }
 
   // trade preferences
-  InfileTree* tps = qe->SubTree("pref_change");
-  int nprefs = tps->NMatches("incommodity");
-  std::string c;
-  for (int i = 0; i < nprefs; i++) {
-    di.NewDatum("CommodPrefs")
-        ->AddVal("incommodity", tps->GetString("incommodity", i))
-        ->AddVal("preference", Query<double>(tps, "preference", i))
-        ->Record();
+  bool exists;
+  int nchanges;
+  exists = qe->NMatches("commod_pref") > 0;
+  if (exists) {
+    InfileTree* tps = qe->SubTree("commod_pref");
+    int nprefs = tps->NMatches("incommodity");
+    for (int i = 0; i < nprefs; i++) {
+      std::string c = tps->GetString("incommodity", i);
+      double p = Query<double>(tps, "preference", i);
+      di.NewDatum("CommodPrefs")
+          ->AddVal("incommodity", c)
+          ->AddVal("preference", p)
+          ->Record();
+    }
   }
 
   // pref changes
-  InfileTree* pcs = qe->SubTree("pref_change");
-  int nchanges = pcs->NMatches("incommodity");
-  for (int i = 0; i < nchanges; i++) {
-    di.NewDatum("PrefChanges")
-        ->AddVal("incommodity", pcs->GetString("incommodity", i))
-        ->AddVal("new_pref", Query<double>(pcs, "new_pref", i))
-        ->AddVal("time", Query<int>(pcs, "time", i))
-        ->Record();
+  exists = qe->NMatches("pref_change") > 0;
+  if (exists) {
+    InfileTree* pcs = qe->SubTree("pref_change");
+    nchanges = pcs->NMatches("incommodity");
+    for (int i = 0; i < nchanges; i++) {
+      di.NewDatum("PrefChanges")
+          ->AddVal("incommodity", pcs->GetString("incommodity", i))
+          ->AddVal("new_pref", Query<double>(pcs, "new_pref", i))
+          ->AddVal("time", Query<int>(pcs, "time", i))
+          ->Record();
+    }
   }
-
+  
   // recipe changes
-  InfileTree* rcs = qe->SubTree("recipe_change");
-  nchanges = rcs->NMatches("incommodity");
-  for (int i = 0; i < nchanges; i++) {
-    di.NewDatum("RecipeChanges")
-        ->AddVal("incommodity", rcs->GetString("incommodity", i))
-        ->AddVal("new_recipe", rcs->GetString("new_recipe", i))
-        ->AddVal("time", Query<int>(rcs, "time", i))
-        ->Record();
+  exists = qe->NMatches("recipe_change") > 0;
+  if (exists) {
+    InfileTree* rcs = qe->SubTree("recipe_change");
+    nchanges = rcs->NMatches("incommodity");
+    for (int i = 0; i < nchanges; i++) {
+      di.NewDatum("RecipeChanges")
+          ->AddVal("incommodity", rcs->GetString("incommodity", i))
+          ->AddVal("new_recipe", rcs->GetString("new_recipe", i))
+          ->AddVal("time", Query<int>(rcs, "time", i))
+          ->Record();
+    }
   }
 }
 
