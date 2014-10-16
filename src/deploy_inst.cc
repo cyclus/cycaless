@@ -11,8 +11,8 @@ DeployInst::~DeployInst() {}
 
 std::string DeployInst::schema() {
     return
-        "<oneOrMore>                               \n"
         "<element name=\"buildorder\">            \n"
+        "<oneOrMore>                               \n"
         "  <element name=\"prototype\">           \n"
         "    <data type=\"string\"/>              \n"
         "  </element>                             \n"
@@ -22,22 +22,21 @@ std::string DeployInst::schema() {
         "  <element name=\"date\">                \n"
         "    <data type=\"nonNegativeInteger\"/>  \n"
         "  </element>                             \n"
-        "</element>                               \n"
-        "</oneOrMore>                              \n";
+        "</oneOrMore>                              \n"
+        "</element>                               \n";
 }
 
 void DeployInst::InfileToDb(cyclus::InfileTree* qe, cyclus::DbInit di) {
   cyclus::Institution::InfileToDb(qe, di);
   qe = qe->SubTree("config/*");
-
-  int nOrders = qe->NMatches("buildorder");
+  cyclus::InfileTree* orders = qe->SubTree("buildorder");
+  int nOrders = qe->NMatches("prototype");
   for (int i = 0; i < nOrders; i++) {
-    cyclus::InfileTree* order = qe->SubTree("buildorder", i);
-    int n = cyclus::Query<int>(order, "number");
+    int n = cyclus::Query<int>(orders, "number", i);
     for (int j = 0; j < n; ++j) {
       di.NewDatum("BuildOrder")
-          ->AddVal("prototype", order->GetString("prototype"))
-          ->AddVal("date", cyclus::Query<int>(order, "date"))
+          ->AddVal("prototype", orders->GetString("prototype", i))
+          ->AddVal("date", cyclus::Query<int>(orders, "date", i))
           ->Record();
     }
   }
