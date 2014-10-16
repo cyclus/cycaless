@@ -7,6 +7,39 @@
 
 namespace cycaless {
 
+Json::Value BatchReactor::annotations() {
+    Json::Value root;
+    Json::Reader reader;
+    bool parsed_ok = reader.parse(
+      "{\"name\":\"cycaless::BatchReactor\",\"entity\":\"facilit"
+      "y\",\"parents\":[\"cyclus::Facility\",\"cyclus::toolkit:"
+      ":CommodityProducer\"],\"all_parents\":[\"cyclus::Agent"
+      "\",\"cyclus::Facility\",\"cyclus::Ider\",\"cyclus::State"
+      "Wrangler\",\"cyclus::TimeListener\",\"cyclus::Trader\","
+      "\"cyclus::toolkit::AgentManaged\",\"cyclus::toolkit::"
+      "CommodityProducer\"],\"doc\":\"A reactor "
+      "facility that has three storage areas that hold "
+      "batches of materials: reserves, core, and storage."
+      " It can manage multiple input-output commodity "
+      "pairs.\","
+          "\"vars\": {"
+          "  \"crctx_\": {"
+          "   \"doc\": \"in-out commodity and fuel recipe mappings\", "
+          "   \"alias\": \"fuel\", "
+          "   \"index\": 0, "
+          "   \"type\": [\"std::vector\", \"CommodityRecipeContext\"],"
+          "   \"uitype\": [\"oneormore\", \"incommodity\", \"recipe\", \"outcommodity\", \"recipe\"]"
+          "  },"
+          "  \"fuel\": \"crctx_\""
+          "}"
+      "}"
+      , root);
+    if (!parsed_ok) {
+      throw cyclus::ValueError("failed to parse annotations for cycamore::DeployInst.");
+    }
+    return root;
+}
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void CommodityRecipeContext::AddInCommod(std::string in_commod,
                                          std::string in_recipe,

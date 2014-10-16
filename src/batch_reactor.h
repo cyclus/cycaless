@@ -249,7 +249,7 @@ class BatchReactor
 
   virtual ~BatchReactor();
 
-  #pragma cyclus def annotations
+  #pragma cyclus decl annotations
 
   #pragma cyclus note {"doc": "A reactor facility that has three storage " \
                               "areas that hold batches of materials: " \
