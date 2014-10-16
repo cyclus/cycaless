@@ -2,19 +2,7 @@
 
 USE_CYCLUS("cycaless" "batch_reactor")
 
-USE_CYCLUS("cycaless" "enrichment_facility")
-
-#USE_CYCLUS("cycaless" "inpro_reactor")
-
-USE_CYCLUS("cycaless" "sink")
-
-USE_CYCLUS("cycaless" "source")
-
 USE_CYCLUS("cycaless" "deploy_inst")
-
-USE_CYCLUS("cycaless" "manager_inst")
-
-USE_CYCLUS("cycaless" "growth_region")
 
 INSTALL_CYCLUS_MODULE("cycaless" "" "NONE")
 
