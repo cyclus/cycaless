@@ -26,6 +26,35 @@ std::string DeployInst::schema() {
         "</element>                               \n";
 }
 
+Json::Value DeployInst::annotations() {
+    Json::Value root;
+    Json::Reader reader;
+    bool parsed_ok = reader.parse(
+      "{\"name\":\"cycamore::DeployInst\",\"entity\":\"instituti"
+      "on\",\"parents\":[\"cyclus::Institution\"],\"all_parents"
+      "\":[\"cyclus::Agent\",\"cyclus::Ider\",\"cyclus::Institu"
+      "tion\",\"cyclus::StateWrangler\",\"cyclus::TimeListene"
+      "r\"],\"doc\":\"An institution that owns, "
+      "operates, and deploys facilities manually defined "
+      "in the input file.\", "
+          "\"vars\": {"
+          "  \"build_sched_\": {"
+          "   \"doc\": \"list of times to build specific facilities\", "
+          "   \"alias\": \"buildorder\","
+          "   \"index\": 0, "
+          "   \"type\": [\"std::map\", \"int\", [\"std::vector\", \"std::string\"]],"
+          "   \"uitype\": [\"oneormore\", \"null\", \"oneormore\", \"prototype\"]"
+          "  },"
+          "  \"buildorder\": \"build_sched_\""
+          "}"
+      "}"
+      , root);
+    if (!parsed_ok) {
+      throw cyclus::ValueError("failed to parse annotations for cycamore::DeployInst.");
+    }
+    return root;
+}
+
 void DeployInst::InfileToDb(cyclus::InfileTree* qe, cyclus::DbInit di) {
   cyclus::Institution::InfileToDb(qe, di);
   qe = qe->SubTree("config/*");
