@@ -43,7 +43,7 @@ Json::Value DeployInst::annotations() {
           "   \"alias\": \"buildorder\","
           "   \"index\": 0, "
           "   \"type\": [\"std::map\", \"int\", [\"std::vector\", \"std::string\"]],"
-          "   \"uitype\": [\"oneormore\", \"null\", \"oneormore\", \"prototype\"]"
+          "   \"uitype\": [\"oneormore\", \"prototype\", \"null\", \"null\"]"
           "  },"
           "  \"buildorder\": \"build_sched_\""
           "}"
