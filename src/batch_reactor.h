@@ -254,7 +254,8 @@ class BatchReactor
   #pragma cyclus note {"doc": "A reactor facility that has three storage " \
                               "areas that hold batches of materials: " \
                               "reserves, core, and storage. It can manage " \
-                              "multiple input-output commodity pairs."}
+                              "multiple input-output commodity pairs.", \
+                       "niche": "reactor"}
 
   virtual cyclus::Agent* Clone();
 

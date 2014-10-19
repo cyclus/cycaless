@@ -31,7 +31,8 @@ Json::Value BatchReactor::annotations() {
           "   \"uitype\": [\"oneormore\", \"incommodity\", \"recipe\", \"outcommodity\", \"recipe\"]"
           "  },"
           "  \"fuel\": \"crctx_\""
-          "}"
+          "},"
+          "\"niche\": \"reactor\""
       "}"
       , root);
     if (!parsed_ok) {
